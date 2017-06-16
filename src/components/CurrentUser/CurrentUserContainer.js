@@ -1,7 +1,7 @@
-import { connect } from 'react-reduxt';
+import { connect } from 'react-redux';
 import { CurrentUser } from './CurrentUser';
 
-const mapStateToprops = (state) => {
+const mapStateToProps = (state) => {
   const currentUser = state.get(`currentUser`);
   return{
       name: currentUser.get(`name`),
@@ -19,6 +19,6 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export const CurrentUserContainer = connect(
-    mapStateToprops,
+    mapStateToProps,
     mapDispatchToProps
 )(CurrentUser);
