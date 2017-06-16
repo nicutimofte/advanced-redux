@@ -4,8 +4,11 @@ import cors from 'cors';
 import webpack from 'webpack';
 import webpackConfig from './../webpack.config'
 import webpackDevMiddleware from 'webpack-dev-middleware';
-const compiler = webpack(webpackConfig);
 import webpackHotMiddleware from "webpack-hot-middleware";
+import socketIO from 'socket.io';
+
+const compiler = webpack(webpackConfig);
+
 
 import {
     channels,
@@ -17,6 +20,7 @@ import {
 
 let app = express();
 const server = http.createServer(app);
+const io = socketIO(server);
 
 app.use(cors());
 app.use(webpackDevMiddleware(compiler, {
@@ -114,3 +118,6 @@ const port = 9000;
 server.listen(port,()=>{
     console.info(`Redux Messenger is listening on port ${port}.`);
 });
+
+import { simulateActivity } from './simulateActivity';
+simulateActivity(currentUser.id);
